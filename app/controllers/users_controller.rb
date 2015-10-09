@@ -5,7 +5,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User
+    @user = User.new
+    if @user.save
+      flash[:message] = "New user created successfully!"
+    else
+      render :back
   end
 
 

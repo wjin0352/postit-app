@@ -44,8 +44,6 @@ ActiveRecord::Schema.define(version: 20150925214319) do
     t.datetime "updated_at"
   end
 
-  add_index "posts", ["user_id"], name: "index_posts_on_user_id"
-
   create_table "users", force: true do |t|
     t.string   "username"
     t.datetime "created_at"

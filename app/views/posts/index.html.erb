@@ -1,5 +1,8 @@
 <%= render 'shared/content_title', title: "All Posts"%>
 
+<%= link_to 'create post', new_post_path, class: 'btn btn-default row'%>
+<hr/>
+
 <% @posts.each do |post| %>
   <div class='row'>
     <div class='well'>
@@ -10,10 +13,12 @@
         <span class='quiet'>posted_by: </span>
           <%= post.creator.username %>, <small>at: <%= post.created_at%></small>
       </p>
-      <small>
       <span>
         <%= link_to "#{post.comments.size} comments", post_path(post) %>
-      </span>
+      </span><br/>
+        <%= link_to 'Edit Post', edit_post_path(post), class: 'btn btn-default' %>
     </div>
   </div>
 <% end %>
+<br/>
+
