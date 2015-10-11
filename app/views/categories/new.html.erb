@@ -1,18 +1,6 @@
 <%= render 'shared/content_title', title: "New Category" %>
 
-<% if @category.errors.any? %>
-  <div class='row'>
-    <div class='alert alert-error span8'>
-      <h4><%= "Please fix the following errors: " %></h4>
-        <ul>
-          <% @category.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-    </div>
-  </div>
-<% end %>
-
+<%= render 'shared/error', obj: @category, text: "please fix the following errors: " %>
 
 <div class="well">
   <%= form_for @category do |f| %>
