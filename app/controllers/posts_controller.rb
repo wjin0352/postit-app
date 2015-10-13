@@ -16,6 +16,8 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.creator = User.first
+    @category = Category.find(params.values[3][:category_id])
+    @post.categories << @category
     if @post.save
       flash["notice"] = 'Your post was successfully created'
       redirect_to posts_path
@@ -28,6 +30,9 @@ class PostsController < ApplicationController
   end
 
   def update
+    @category = Category.find(params.values[4][:category_id])
+    @post.categories << @category
+
     if @post.update_attributes(post_params)
       flash["notice"] = "Your post has been updated."
       redirect_to posts_path

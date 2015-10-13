@@ -10,6 +10,10 @@
       <%= f.label :description %>
       <%= f.text_area :description, rows: 5 %>
       <br/>
+
+      <%= collection_select(@post.categories, :category_id, Category.all, :id, :name) %>
+
+      <br/>
       <%= f.submit(@post.new_record? ? "Create Post": "Update Post" , class: "btn btn-primary") %>
     </div>
   <% end %>
