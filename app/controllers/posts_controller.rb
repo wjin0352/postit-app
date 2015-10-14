@@ -14,10 +14,11 @@ class PostsController < ApplicationController
   end
 
   def create
+    # binding.pry
     @post = Post.new(post_params)
     @post.creator = User.first
-    @category = Category.find(params.values[3][:category_id])
-    @post.categories << @category
+    # @category = Category.find(params.values[3][:category_id])
+    # @post.categories << @category
     if @post.save
       flash["notice"] = 'Your post was successfully created'
       redirect_to posts_path
@@ -30,8 +31,9 @@ class PostsController < ApplicationController
   end
 
   def update
-    @category = Category.find(params.values[4][:category_id])
-    @post.categories << @category
+    # binding.pry
+    # @category = Category.find(params.values[4][:category_id])
+    # @post.categories << @category
 
     if @post.update_attributes(post_params)
       flash["notice"] = "Your post has been updated."
@@ -44,7 +46,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :url, :description)
+    params.require(:post).permit(:title, :url, :description, category_ids: [])
   end
 
   def set_post

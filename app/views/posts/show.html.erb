@@ -27,7 +27,7 @@
     <em>"<%= comment.body %>"</em>
     <br/>
     <span class="quiet">by</span> <%= comment.creator.username %>
-    <small>at <%= comment.created_at %></small>
+    <small>at <%= fix_time(comment.created_at) %></small>
     <hr/>
   </div>
 <% end %>

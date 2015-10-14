@@ -10,9 +10,12 @@
       <%= f.label :description %>
       <%= f.text_area :description, rows: 5 %>
       <br/>
-
-      <%= collection_select(@post.categories, :category_id, Category.all, :id, :name) %>
-
+      <div>
+        <%= f.label "Categories" %>
+        <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |cb| %>
+          <% cb.label(class: "checkbox inline") { cb.check_box(class: "checkbox") + cb.text } %>
+        <% end %>
+      </div>
       <br/>
       <%= f.submit(@post.new_record? ? "Create Post": "Update Post" , class: "btn btn-primary") %>
     </div>
