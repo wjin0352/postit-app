@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :update, :edit]
+  before_action :require_user, except: [:index, :show]
 
   def index
     @posts = Post.all
@@ -16,7 +17,7 @@ class PostsController < ApplicationController
   def create
     # binding.pry
     @post = Post.new(post_params)
-    @post.creator = User.first
+    @post.creator = current_user
     # @category = Category.find(params.values[3][:category_id])
     # @post.categories << @category
     if @post.save

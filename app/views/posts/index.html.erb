@@ -1,7 +1,9 @@
 <%= render 'shared/content_title', title: "All Posts"%>
-
-<%= link_to 'create post', new_post_path, class: 'btn btn-default row'%>
+<% if logged_in? %>
+<%= link_to 'create post', new_post_path, class: 'btn btn-primary row'%>
 <hr/>
+<% end %>
+
 
 <% @posts.each do |post| %>
   <%= render 'post', post: post %>

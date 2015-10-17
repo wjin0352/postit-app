@@ -1,0 +1,15 @@
+<%= render 'shared/error', obj: @user, text: "please fix the following errors: " %>
+
+<div class="row well">
+  <div class="control-group">
+    <%= form_for @user do |f| %>
+      <%= f.label :username %>
+      <%= f.text_field :username %>
+      <br/>
+      <%= f.label 'password' %>
+      <%= f.password_field :password %>
+      <br/>
+      <%= f.submit "Create User", class: "btn btn-primary" %>
+  <% end %>
+  </div>
+</div>

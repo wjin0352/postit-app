@@ -1,0 +1,13 @@
+<div class="row well">
+  <div class="control-group">
+    <%= form_tag 'login' do %>
+      <%= label_tag 'username' %>
+      <%= text_field_tag :username %>
+      <br/>
+      <%= label_tag :password %>
+      <%= password_field_tag :password %>
+      <br/>
+      <%= submit_tag "Login" %>
+    <% end %>
+  </div>
+</div>

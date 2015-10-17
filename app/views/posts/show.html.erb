@@ -1,5 +1,7 @@
 <p class='pull-right'>
+  <% if logged_in? %>
   [<%= link_to 'edit this post', edit_post_path(@post) %>]
+  <% end %>
 </p>
 <p>
   <%= render @post.categories %>
@@ -27,7 +29,7 @@
     <em>"<%= comment.body %>"</em>
     <br/>
     <span class="quiet">by</span> <%= comment.creator.username %>
-    <small>at <%= fix_time(comment.created_at) %></small>
+    <small>at fix_time(comment.created_at)</small>
     <hr/>
   </div>
 <% end %>

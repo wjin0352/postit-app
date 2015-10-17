@@ -10,6 +10,8 @@
       <span>
         <%= link_to "#{post.comments.size} comments", post_path(post) %>
       </span><br/>
+        <% if logged_in? %>
         <%= link_to 'Edit Post', edit_post_path(post), class: 'btn btn-default' %>
+        <% end %>
     </div>
   </div>
