@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    # need a new instance of comment to show on my post page
     @comment = Comment.new
   end
 

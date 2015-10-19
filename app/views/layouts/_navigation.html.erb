@@ -7,7 +7,7 @@
   </li>
 </ul>
 
-<div class='btn-group nav-item'>
+<div class='btn-group nav_item'>
   <%= link_to "", class: "btn btn-small dropdown-toggle", 'data-toggle' => 'dropdown' do %>
     Categories <span class="caret"></span>
   <% end %>
@@ -25,13 +25,48 @@
     </li>
   </ul>
 </div>
-<div class="nav-item">
-  <% if logged_in? %>
-    <%= link_to 'New Post', new_post_path, class: 'btn btn-primary btn-small' %>
-    <%= link_to 'Log out', logout_path, class: 'btn btn-warning btn-small' %>
-    Welcome <%= current_user.username %>
-  <% else %>
-    <%= link_to 'Register', register_path, class: 'btn btn-success btn-small' %>
-    <%= link_to 'Login', login_path, class: 'btn btn-success btn-small' %>
-  <% end %>
-</div>
+
+<% if logged_in? %>
+  <div class="nav_item">
+    <%= link_to 'New Post', new_post_path, class: 'btn btn-success btn-small' %>
+  </div>
+
+  <!-- User drop down menu start -->
+  <div class="btn-group nav_item">
+
+    <%= link_to "", class: "btn btn-small dropdown-toggle", "data-toggle" => "dropdown" do %>
+      <%= current_user.username %>'s menu <span class="caret"></span>
+    <% end %>
+
+    <ul class="dropdown-menu">
+      <!-- NOTE: used a do block so I could get the icon-pencil in -->
+      <li>
+        <%= link_to edit_user_path(current_user) do %>
+          <i class="icon-pencil"></i>
+          Edit Profile
+        <% end %>
+      </li>
+      <li>
+        <%= link_to user_path(current_user) do %>
+          <i class="icon-user"></i>
+          View Profile
+        <% end %>
+      </li>
+      <li>
+        <%= link_to logout_path, { :style => "background-color: orange" } do %>
+          <i class="icon-circle-arrow-left"></i>
+          Log Out
+        <% end %>
+      </li>
+    </ul>
+
+  </div>
+  <!-- User drop down menu end! -->
+
+  <div class="nav_item">Welcome <%= current_user.username %></div>
+
+<% else %>
+  <%= link_to 'Register', register_path, class: 'btn btn-success btn-small' %>
+  <%= link_to 'Login', login_path, class: 'btn btn-success btn-small' %>
+<% end %>
+

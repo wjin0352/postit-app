@@ -1,17 +1,31 @@
 <div class='row'>
-    <div class='well'>
+  <div class="row">
+    <div class="span0 well text-center">
+      <%= link_to "" %>
+        <i class='icon-arrow-up'></i>
+        <br/>
+        <i class='icon-arrow-down'></i>
+    </div>
+  </div>
+      <div class='well'>
       <%= render post.categories %>
+
       <h4><%= link_to post.title, fix_url(post.url) %></h4>
       <p><%= post.description %></p>
       <p>
-        <span class='quiet'>posted_by: </span>
-          <%= post.creator.username %>, <small>at: <%= fix_time(post.created_at)%></small>
+        <span class="quiet">posted by:
+        <%= link_to post.creator.username, user_path(post.creator) %>
+        </span>
+        <small><%= fix_time(post.created_at) %></small>
       </p>
-      <span>
-        <%= link_to "#{post.comments.size} comments", post_path(post) %>
-      </span><br/>
+
+      <small>
+        <span>
+          <%= link_to "comments (#{post.comments.count})", post_path(post)  %>
+        </span>
+      </small><br/>
         <% if logged_in? %>
-        <%= link_to 'Edit Post', edit_post_path(post), class: 'btn btn-default' %>
+        <%= link_to 'Edit Post', edit_post_path(post), class: 'btn btn-default btn-small' %>
         <% end %>
     </div>
   </div>

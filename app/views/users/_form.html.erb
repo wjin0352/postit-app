@@ -6,10 +6,10 @@
       <%= f.label :username %>
       <%= f.text_field :username %>
       <br/>
-      <%= f.label 'password' %>
+      <%= f.label :password %>
       <%= f.password_field :password %>
       <br/>
-      <%= f.submit "Create User", class: "btn btn-primary" %>
+      <%= f.submit(@user.new_record? ?  title : title, class: "btn btn-primary") %>
   <% end %>
   </div>
 </div>
