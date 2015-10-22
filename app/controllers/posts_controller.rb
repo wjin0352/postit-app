@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :update, :edit]
+  before_action :set_post, only: [:show, :update, :edit, :vote]
   before_action :require_user, except: [:index, :show]
 
   def index
@@ -9,6 +9,12 @@ class PostsController < ApplicationController
   def show
     # need a new instance of comment to show on my post page
     @comment = Comment.new
+  end
+
+  def vote
+    @vote = Vote.create(votable: @post, vote: params[:vote], user_id: current_user.id )
+    flash['notice'] = "Vote was recorded!"
+    redirect_to :back
   end
 
   def new

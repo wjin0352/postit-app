@@ -14,7 +14,13 @@ PostitTemplate::Application.routes.draw do
   # patch 'posts/:id', to: "posts#update"
 
   resources :posts, except: [:destroy] do
+    member do
+      post 'vote'
+    end
     resources :comments, only: [:create]
+      member do
+        post 'vote'
+      end
   end
 
   resources :users, except: [:index]
