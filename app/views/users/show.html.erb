@@ -14,23 +14,23 @@
 <h5><%= @user.username %>'s Activity:</h5>
 
   <!-- tab feature START -->
-  <ul class="nav nav-tabs">
-    <li class="<%= 'active' if params[:tab].nil? %>">
-      <%= link_to "Posts (#{@user.posts.count})", user_path(@user) %>
-    </li>
-    <li class="<%= 'active' if params[:tab] == 'comments' %>" >
-      <%= link_to "Comments (#{@user.comments.count})", user_path(@user, tab: 'comments') %>
-    </li>
-  </ul>
+    <ul class="nav nav-tabs">
+      <li class="<%= 'active' if params[:tab].nil? %>">
+        <%= link_to "Posts (#{@user.posts.count})", user_path(@user) %>
+      </li>
+      <li class="<%= 'active' if params[:tab] == 'comments' %>" >
+        <%= link_to "Comments (#{@user.comments.count})", user_path(@user, tab: 'comments') %>
+      </li>
+    </ul>
 
-  <% if params[:tab].nil? %>
-    <% @posts.each do |post| %>
-      <%= render 'posts/post', post: post %>
+    <% if params[:tab].nil? %>
+      <% @posts.each do |post| %>
+        <%= render 'posts/post', post: post %>
+      <% end %>
+    <% elsif params[:tab] == 'comments' %>
+      <% @comments.each do |comment| %>
+        <%= render 'comments/comment', comment: comment, show_post: true %>
+      <% end %>
     <% end %>
-  <% elsif params[:tab] == 'comments' %>
-    <% @comments.each do |comment| %>
-      <%= render 'comments/comment', comment: comment, show_post: true %>
-    <% end %>
-  <% end %>
   <!-- tab feature END -->
 

@@ -1,31 +1,36 @@
 <div class='row'>
-  <div class="row">
-    <div class="span0 well text-center">
-      <%= link_to "" %>
-        <i class='icon-arrow-up'></i>
-        <br/>
-        <i class='icon-arrow-down'></i>
-    </div>
+  <div class="span0 well text-center">
+    <%= link_to "" do %>
+      <i class="icon icon-thumbs-up"></i>
+    <% end %>
+    <br/>
+    <%= link_to "" do %>
+      <i class='icon icon-thumbs-down'></i>
+    <% end %>
   </div>
-      <div class='well'>
-      <%= render post.categories %>
+  <div class='span8 well'>
+    <%= render post.categories %>
 
-      <h4><%= link_to post.title, fix_url(post.url) %></h4>
-      <p><%= post.description %></p>
-      <p>
-        <span class="quiet">posted by:
-        <%= link_to post.creator.username, user_path(post.creator) %>
-        </span>
-        <small><%= fix_time(post.created_at) %></small>
-      </p>
+    <h4>
+      <%= link_to post.title, fix_url(post.url) %>
+    </h4>
+    <p>
+      <%= post.description %>
+    </p>
+    <p>
+      <span class="quiet">posted by:
+      <%= link_to post.creator.username, user_path(post.creator) %>
+      </span>
+      <small><%= fix_time(post.created_at) %></small>
+    </p>
 
-      <small>
-        <span>
-          <%= link_to "comments (#{post.comments.count})", post_path(post)  %>
-        </span>
+    <small>
+      <span>
+        <%= link_to "comments (#{post.comments.count})", post_path(post)  %>
+      </span>
       </small><br/>
-        <% if logged_in? %>
-        <%= link_to 'Edit Post', edit_post_path(post), class: 'btn btn-default btn-small' %>
-        <% end %>
-    </div>
+      <% if logged_in? %>
+      <%= link_to 'Edit Post', edit_post_path(post), class: 'btn btn-default btn-small' %>
+      <% end %>
   </div>
+</div>
