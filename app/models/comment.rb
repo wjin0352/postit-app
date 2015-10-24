@@ -5,17 +5,15 @@ class Comment < ActiveRecord::Base
 
   validates :body, presence: true
 
-
-  def comment_total_votes
-    self.comment_up_votes - self.comment_down_votes
+  def total_votes
+    self.up_votes - self.down_votes
   end
 
-  def comment_up_votes
+  def up_votes
     self.votes.where(:vote => true).size
   end
 
-  def comment_down_votes
+  def down_votes
     self.votes.where(:vote => false).size
   end
-
 end

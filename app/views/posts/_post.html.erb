@@ -1,14 +1,18 @@
 <div class='row'>
   <!-- votes side bar -->
   <div class="span0 well text-center">
+    <% if logged_in? %>
     <%= link_to vote_post_path(post, :vote => true), method: 'post' do %>
       <i class="icon icon-thumbs-up"></i>
     <% end %>
     <br/>
+    <% end %>
     <%= post.total_votes %> likes
     <br/>
+    <% if logged_in? %>
     <%= link_to vote_post_path(post, :vote => false), method: 'post' do %>
       <i class='icon icon-thumbs-down'></i>
+    <% end %>
     <% end %>
   </div>
   <!-- votes side bar end -->
