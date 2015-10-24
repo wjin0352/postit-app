@@ -12,7 +12,14 @@ class CommentsController < ApplicationController
     else
       render 'posts/show'
     end
+  end
 
+  def vote
+    @post = Post.find(params[:post_id])
+    @comment = Comment.find(params[:id])
+    @vote = Vote.create(votable: @comment, vote: params[:vote], creator: current_user)
+    flash['notice'] = "Vote on comment was recorded"
+    redirect_to :back
   end
 
   private

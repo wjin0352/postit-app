@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :require_user, except: [:index, :show]
 
   def index
-    @posts = Post.all
+    @posts = Post.all.sort_by{|i| i.total_votes }.reverse
   end
 
   def show
@@ -12,7 +12,7 @@ class PostsController < ApplicationController
   end
 
   def vote
-    @vote = Vote.create(votable: @post, vote: params[:vote], user_id: current_user.id )
+    @vote = Vote.create(votable: @post, vote: params[:vote], creator: current_user)
     flash['notice'] = "Vote was recorded!"
     redirect_to :back
   end

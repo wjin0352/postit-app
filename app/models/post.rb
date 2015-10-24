@@ -11,7 +11,7 @@ class Post < ActiveRecord::Base
 
 
   def total_votes
-    up_votes - down_votes
+    self.up_votes - self.down_votes
   end
 
   def up_votes
@@ -21,5 +21,6 @@ class Post < ActiveRecord::Base
   def down_votes
     self.votes.where(:vote => false).size
   end
+
 
 end

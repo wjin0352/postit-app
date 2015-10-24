@@ -1,4 +1,18 @@
 <% show_post ||= false %>
+<div class='row'>
+<!-- votes side bar -->
+    <div class="span0 well text-center">
+      <%= link_to vote_post_comment_path(comment.post, comment, :vote => true), method: 'post' do %>
+        <i class="icon icon-thumbs-up"></i>
+      <% end %>
+      <br/>
+      <%= comment.comment_total_votes %> likes
+      <br/>
+      <%= link_to vote_post_comment_path( comment.post, comment, :vote => false), method: 'post' do %>
+        <i class='icon icon-thumbs-down'></i>
+      <% end %>
+    </div>
+  <!-- votes side bar end -->
 
 <div class="well span8">
   <em>"<%= comment.body %>"</em>
@@ -9,4 +23,5 @@
     <span class="quiet">by</span> <%= link_to comment.creator.username, user_path(comment.creator) %>
     <small>at fix_time(comment.created_at)</small>
   <hr/>
+</div>
 </div>

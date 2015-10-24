@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @posts = @user.posts
+    @posts = @user.posts.sort_by{|i| i.total_votes }.reverse
     @comments = @user.comments
   end
 
