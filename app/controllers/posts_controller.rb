@@ -13,8 +13,14 @@ class PostsController < ApplicationController
 
   def vote
     @vote = Vote.create(votable: @post, vote: params[:vote], creator: current_user)
-    flash['notice'] = "Vote was recorded!"
+    if @vote.valid?
+      flash['notice'] = "Vote was recorded!"
+    else
+      flash['message'] = "You can only vote on a post once."
+    end
+
     redirect_to :back
+
   end
 
   def new
