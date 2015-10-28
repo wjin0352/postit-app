@@ -2,15 +2,17 @@
   <!-- votes side bar -->
   <div class="span0 well text-center">
     <% if logged_in? %>
-    <%= link_to vote_post_path(post, :vote => true), method: 'post' do %>
+    <%= link_to vote_post_path(post, :vote => true), method: 'post', remote: true do %>
       <i class="icon icon-thumbs-up"></i>
     <% end %>
     <br/>
     <% end %>
-    <%= post.total_votes %> likes
+    <span id="post_total_votes_<%= post.id %>">
+      <%= post.total_votes %> likes
+    </span>
     <br/>
     <% if logged_in? %>
-    <%= link_to vote_post_path(post, :vote => false), method: 'post' do %>
+    <%= link_to vote_post_path(post, :vote => false), method: 'post', remote: true do %>
       <i class='icon icon-thumbs-down'></i>
     <% end %>
     <% end %>
