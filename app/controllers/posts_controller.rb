@@ -14,15 +14,14 @@ class PostsController < ApplicationController
   def vote
     @vote = Vote.create(votable: @post, vote: params[:vote], creator: current_user)
     respond_to do |format|
-      format.html {
+      format.html do
         if @vote.valid?
           flash['notice'] = "Vote was recorded!"
         else
           flash['message'] = "You can only vote on a post once."
         end
         redirect_to :back
-        }
-
+      end
       format.js
     end
   end
@@ -68,7 +67,7 @@ class PostsController < ApplicationController
   end
 
   def set_post
-    @post = Post.find(params[:id])
+    @post = Post.find_by(slug: params[:id])
   end
 
 end
