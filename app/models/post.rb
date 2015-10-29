@@ -9,7 +9,7 @@ class Post < ActiveRecord::Base
   validates :description, presence: true
   validates :url, presence: true, uniqueness: true
 
-  before_save :create_slug
+  before_save :create_post_slug
 
   def total_votes
     self.up_votes - self.down_votes
@@ -23,16 +23,12 @@ class Post < ActiveRecord::Base
     self.votes.where(:vote => false).size
   end
 
-  def create_slug
-    self.slug = self.title.gsub(' ','-').downcase
+  def to_param
+    self.slug
   end
 
-  def to_param
-    # to_param() public
-    # Returns a String, which Action Pack uses for constructing an URL to this object. The default implementation returns this record’s id as a String, or nil if this record’s unsaved.
-    # You can override to_param in your model to make user_path construct a path using the user’s name instead of the user’s id:
-
-    self.slug
+  def create_post_slug
+    self.slug = self.title.gsub(' ','-').downcase
   end
 
 end
