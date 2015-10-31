@@ -11,17 +11,23 @@ class Post < ActiveRecord::Base
 
   before_save :create_slug
 
-  def total_votes
-    self.up_votes - self.down_votes
-  end
+  include Voting
 
-  def up_votes
-    self.votes.where(:vote => true).size
-  end
+# NOTE:  I added all these to a module and/or gem in /lib
+# Files under /lib are not by default autoloaded into Rails
+# So when adding the module remember to include the loadpath in application.rb
 
-  def down_votes
-    self.votes.where(:vote => false).size
-  end
+  # def total_votes
+  #   self.up_votes - self.down_votes
+  # end
+
+  # def up_votes
+  #   self.votes.where(:vote => true).size
+  # end
+
+  # def down_votes
+  #   self.votes.where(:vote => false).size
+  # end
 
   def to_param
     self.slug
