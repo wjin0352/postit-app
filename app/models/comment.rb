@@ -1,11 +1,11 @@
 class Comment < ActiveRecord::Base
+  include Voting
   belongs_to :post
   belongs_to :creator, foreign_key: 'user_id', class_name: 'User'
-  has_many :votes, as: :votable
 
   validates :body, presence: true
 
-  include Voting
+
 
   # NOTE:  I added all these to a module and/or gem in /lib
 # Files under /lib are not by default autoloaded into Rails
