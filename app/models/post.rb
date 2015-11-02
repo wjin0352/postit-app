@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  include Voting
+  include Votable
   belongs_to :creator, foreign_key: "user_id", class_name: "User"
   has_many :comments
   has_many :post_categories
@@ -11,7 +11,6 @@ class Post < ActiveRecord::Base
 
   before_save :create_slug
 
-  include Voting
 
 # NOTE:  I added all these to a module and/or gem in /lib
 # Files under /lib are not by default autoloaded into Rails

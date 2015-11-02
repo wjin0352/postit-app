@@ -1,6 +1,6 @@
 # using conserns, allows us to write much cleaner syntax
 
-module Voting
+module Votable
   extend ActiveSupport::Concern
 
   included do
@@ -20,9 +20,6 @@ module Voting
   end
 
 end
-
-
-
 
 # using normal meta-programming
 =begin
