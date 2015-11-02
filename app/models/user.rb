@@ -13,4 +13,12 @@ class User < ActiveRecord::Base
   # to specify variable slug attribute in module as name
   sluggable_column :username
 
+  def admin?
+    self.role == 'admin'
+  end
+
+  def moderator?
+    self.role == 'moderator'
+  end
+
 end

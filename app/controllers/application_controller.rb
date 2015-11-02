@@ -22,4 +22,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_admin
+    access_denied unless logged_in? and current_user.admin?
+  end
+
+  def access_denied
+    flash['message'] = 'You don\'t have access'
+    redirect_to root_path
+  end
+
+  def require_moderator
+    access_denied unless logged_in? and current_user.moderator?
+  end
+
 end
