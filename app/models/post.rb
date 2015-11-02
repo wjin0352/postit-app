@@ -1,5 +1,7 @@
 class Post < ActiveRecord::Base
   include Votable
+  include Sluggable
+
   belongs_to :creator, foreign_key: "user_id", class_name: "User"
   has_many :comments
   has_many :post_categories
@@ -9,8 +11,8 @@ class Post < ActiveRecord::Base
   validates :description, presence: true
   validates :url, presence: true, uniqueness: true
 
-  before_save :create_slug
-
+  # to specify variable slug attribute in module as name
+  sluggable_column :title
 
 # NOTE:  I added all these to a module and/or gem in /lib
 # Files under /lib are not by default autoloaded into Rails
@@ -28,6 +30,8 @@ class Post < ActiveRecord::Base
   #   self.votes.where(:vote => false).size
   # end
 
+# put this into a module
+=begin
   def to_param
     self.slug
   end
@@ -59,5 +63,6 @@ class Post < ActiveRecord::Base
     str.gsub!(/-+/,'-')
     str.downcase
   end
+=end
 
 end
