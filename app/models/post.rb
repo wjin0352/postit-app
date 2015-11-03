@@ -14,6 +14,7 @@ class Post < ActiveRecord::Base
   # to specify variable slug attribute in module as name
   sluggable_column :title
 
+
 # NOTE:  I added all these to a module and/or gem in /lib
 # Files under /lib are not by default autoloaded into Rails
 # So when adding the module remember to include the loadpath in application.rb

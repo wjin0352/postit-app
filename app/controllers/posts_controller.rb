@@ -1,13 +1,14 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :update, :edit, :vote]
   before_action :require_user, except: [:index, :show]
+  before_action :require_admin, only: [:edit, :update]
+  before_action :require_post_creator, only: [:edit, :update]
 
   def index
     @posts = Post.all.sort_by{|i| i.total_votes }.reverse
   end
 
   def show
-    # need a new instance of comment to show on my post page
     @comment = Comment.new
   end
 
@@ -67,6 +68,12 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find_by(slug: params[:id])
+  end
+
+  def require_post_creator
+    if (!current_user.admin? || (logged_in? and (current_user != @post.creator)))
+      access_denied
+    end
   end
 
 end

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :show]
   before_action :require_same_user, only: [:edit, :update]
+  # before_action :set_time_zone, except: [:show]
 
   def new
     @user = User.new
@@ -37,7 +38,7 @@ class UsersController < ApplicationController
   private
 
   def users_params
-    params.require(:user).permit(:username, :password)
+    params.require(:user).permit(:username, :password, :time_zone)
   end
 
   def set_user
@@ -50,6 +51,11 @@ class UsersController < ApplicationController
       redirect_to root_path
     end
   end
+
+  # def set_time_zone
+  #   tz = current_user ? current_user.time_zone : nil
+  #   Time.zone =  tz || ActiveSupport::TimeZone["Eastern Time (US & Canada)"]
+  # end
 
 end
 
