@@ -15,12 +15,19 @@ class UsersController < ApplicationController
   def create
     @user = User.new(users_params)
     if @user.save
+      if @user.two_factor_auth?
+        session[:two_factor] = true
+        @user.create_pin!
+        session[:user_id] = @user.id # so im logged in after i register.
+        redirect_to pin_path
+      elsif
       session[:user_id] = @user.id # so im logged in after i register.
       flash['notice'] = "User was successfully registered"
       redirect_to root_path
     else
       render 'new'
     end
+  end
   end
 
   def edit
@@ -38,7 +45,7 @@ class UsersController < ApplicationController
   private
 
   def users_params
-    params.require(:user).permit(:username, :password, :time_zone)
+    params.require(:user).permit(:username, :password, :time_zone, :phone, :pin)
   end
 
   def set_user

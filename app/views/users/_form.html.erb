@@ -9,6 +9,9 @@
       <%= f.label :password %>
       <%= f.password_field :password %>
       <br/>
+      <%= f.label :phone %>
+      <%= f.text_field :phone, :placeholder => "Optional for 2 Factor Auth" %>
+      <br/>
       <%= f.label :time_zone %>
       <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, default: Time.zone.name %>
       <br/>
