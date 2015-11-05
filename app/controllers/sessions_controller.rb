@@ -15,8 +15,8 @@ class SessionsController < ApplicationController
           session[:two_factor] = true
           # generate pin number save to db
           user.create_pin!
-          # send sms to twillio, send user pin number to use
-
+          # send pin to twillio, send user sms pin number to use
+          # user.send_pin_to_twillio!
           # show a form to enter pin number (create a route for this form, get and post)
           redirect_to pin_path
         else

@@ -21,9 +21,9 @@ class UsersController < ApplicationController
         session[:user_id] = @user.id # so im logged in after i register.
         redirect_to pin_path
       elsif
-      session[:user_id] = @user.id # so im logged in after i register.
-      flash['notice'] = "User was successfully registered"
-      redirect_to root_path
+        session[:user_id] = @user.id # so im logged in after i register.
+        flash['notice'] = "User was successfully registered"
+        redirect_to root_path
     else
       render 'new'
     end
@@ -35,10 +35,16 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(users_params)
-      flash['notice'] = "You have successfully updated your profile"
-      redirect_to user_path(@user)
+      if @user.two_factor_auth?
+        session[:two_factor] = true
+        @user.create_pin!
+        redirect_to pin_path
+      elsif
+        flash['notice'] = "You have successfully updated your profile"
+        redirect_to user_path(@user)
     else
       render :edit
+      end
     end
   end
 

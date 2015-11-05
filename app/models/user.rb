@@ -33,4 +33,21 @@ class User < ActiveRecord::Base
     self.update_column(:pin, nil)
   end
 
+  def send_pin_to_twillio!
+    # put your own credentials here
+    account_sid = 'ENV["ACCOUNT_SID"]'
+    auth_token = 'ENV["AUTH_TOKEN"]'
+
+    # set up a client to talk to the Twilio REST API
+
+    @client = Twilio::REST::Client.new account_sid, auth_token
+
+    @client.account.messages.create({
+      :from => '+13474427964',
+      :to => '#{self.phone}',
+      :body => 'Hi, please enter your pin to continue with login: #{self.pin}',
+    })
+
+  end
+
 end
