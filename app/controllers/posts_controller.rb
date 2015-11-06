@@ -5,7 +5,8 @@ class PostsController < ApplicationController
   before_action :require_post_creator, only: [:edit, :update]
 
   def index
-    @posts = Post.all.sort_by{|i| i.total_votes }.reverse
+    @posts = Post.limit(Post::PER_PAGE).offset(params[:offset]).sort_by{|i| i.total_votes }.reverse
+    @total_pages = (Post.all.size.to_f / Post::PER_PAGE + 1).ceil
   end
 
   def show
@@ -34,8 +35,6 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.creator = current_user
-    # @category = Category.find(params.values[3][:category_id])
-    # @post.categories << @category
     if @post.save
       flash["notice"] = 'Your post was successfully created'
       redirect_to posts_path
@@ -48,10 +47,6 @@ class PostsController < ApplicationController
   end
 
   def update
-    # binding.pry
-    # @category = Category.find(params.values[4][:category_id])
-    # @post.categories << @category
-
     if @post.update_attributes(post_params)
       flash["notice"] = "Your post has been updated."
       redirect_to posts_path
